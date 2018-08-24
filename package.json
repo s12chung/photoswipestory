@@ -1,8 +1,8 @@
 {
-  "name": "blueprint",
+  "name": "photopage",
   "version": "1.0.0",
   "main": "assets/js/index.js",
-  "repository": "https://github.com/s12chung/blueprint",
+  "repository": "https://github.com/s12chung/photopage",
   "author": "Steve Chung",
   "license": "MIT",
   "private": false,

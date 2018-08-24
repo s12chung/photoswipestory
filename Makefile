@@ -19,7 +19,7 @@ dev: clean build watch
 prod: clean
 	NODE_ENV=production webpack -p
 	go install
-	$(GOPATH)/bin/blueprint
+	$(GOPATH)/bin/photopage
 
 test:
 	go test ./go/...
@@ -84,14 +84,14 @@ clean-all: clean
 
 server: build-assets
 	go install
-	$(GOPATH)/bin/blueprint -server
+	$(GOPATH)/bin/photopage -server
 
 file-server:
-	$(GOPATH)/bin/blueprint -file-server
+	$(GOPATH)/bin/photopage -file-server
 
 build-go:
 	go install
-	$(GOPATH)/bin/blueprint
+	$(GOPATH)/bin/photopage
 
 build-assets:
 	webpack --color

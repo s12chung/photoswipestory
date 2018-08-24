@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/s12chung/gostatic/blueprint/go/content"
+	"photopage/go/content"
 
 	"github.com/s12chung/gostatic/go/app"
 	"github.com/s12chung/gostatic/go/cli"
