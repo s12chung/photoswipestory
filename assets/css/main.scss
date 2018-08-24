@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800&subset=korean');
+
+$ink: rgba(36,30,32,0.9);
+$paper: white;
+
+$sans-serif: 'Nanum Gothic', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+@mixin sans-serif {
+  font-family: $sans-serif;
+  font-weight: 400;
+}
+
+$base-font-size: 24px;
+
+html {
+  @include sans-serif;
+  line-height: 1.5;
+  font-size: $base-font-size;
+
+  color: $ink;
+  background-color: $paper;
+}
+
+@media all and (max-width: 575px) {
+  html {
+    font-size: $base-font-size * 0.70;
+  }
+}
+
+img {
+  width: 100%;
+}
+
+.text {
+  padding: 0.75em 1em;
+  max-width: 27rem;
+  margin-left: auto;
+  margin-right: auto;
+}

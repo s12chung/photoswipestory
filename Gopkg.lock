@@ -11,18 +11,31 @@
   version = "v1.1.1"
 
 [[projects]]
+  name = "github.com/russross/blackfriday"
+  packages = ["."]
+  revision = "cadec560ec52d93835bf2f15bd794700d3a2473b"
+  version = "v2.0.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/s12chung/gostatic"
   packages = [
     "go/app",
     "go/cli",
     "go/lib/html",
+    "go/lib/markdown",
     "go/lib/pool",
     "go/lib/router",
     "go/lib/utils",
     "go/lib/webpack"
   ]
   revision = "16cfc4fc2b001ee55267a1322adfcd13de57f69e"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/shurcooL/sanitized_anchor_name"
+  packages = ["."]
+  revision = "86672fcb3f950f35f2e675df2240550f2a50762f"
 
 [[projects]]
   name = "github.com/sirupsen/logrus"
@@ -48,6 +61,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c523dc8933c0b55608270e91ed509343f9c36afbd0fb1344df6311ef278aeae5"
+  inputs-digest = "06c2643a49715885a51058e8c2d31c19e9e4fd09de2805d2ea57469969d2e4ef"
   solver-name = "gps-cdcl"
   solver-version = 1

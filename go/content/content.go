@@ -5,8 +5,11 @@ import (
 
 	"github.com/s12chung/gostatic/go/app"
 	"github.com/s12chung/gostatic/go/lib/html"
+	"github.com/s12chung/gostatic/go/lib/markdown"
 	"github.com/s12chung/gostatic/go/lib/router"
 	"github.com/s12chung/gostatic/go/lib/webpack"
+
+	"photopage/go/content/plugins"
 )
 
 type Content struct {
@@ -15,12 +18,17 @@ type Content struct {
 
 	HtmlRenderer *html.Renderer
 	Webpack      *webpack.Webpack
+	Markdown     *markdown.Markdown
 }
 
 func NewContent(generatedPath string, settings *Settings, log logrus.FieldLogger) *Content {
+	md := markdown.NewMarkdown(settings.Markdown, log)
+	sectionizer := plugins.NewSectionzier()
+
 	w := webpack.NewWebpack(generatedPath, settings.Webpack, log)
-	htmlRenderer := html.NewRenderer(settings.Html, []html.Plugin{w}, log)
-	return &Content{settings, log, htmlRenderer, w}
+	htmlRenderer := html.NewRenderer(settings.Html, []html.Plugin{w, md, sectionizer}, log)
+
+	return &Content{settings, log, htmlRenderer, w, md}
 }
 
 func (content *Content) WildcardUrls() ([]string, error) {
@@ -49,7 +57,7 @@ func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
 }
 
 func (content *Content) getRoot(ctx router.Context) error {
-	return content.RenderHtml(ctx, "root", "", "Hello World!")
+	return content.RenderHtml(ctx, "root", "", nil)
 }
 
 func (content *Content) get404(ctx router.Context) error {

@@ -3,12 +3,13 @@
 <head>
     <title>{{(title .)}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <link rel="stylesheet" media="all" href="{{webpackUrl "vendor.css"}}">
     <link rel="stylesheet" media="all" href="{{webpackUrl "main.css"}}">
 </head>
 <body>
-<a href="/"><img class="logo" style="width: 50px;" src="{{webpackUrl "images/logo.png"}}"/></a>
 {{template "content" .}}
 </body>
 </html>
