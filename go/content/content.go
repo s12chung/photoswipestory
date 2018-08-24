@@ -23,23 +23,6 @@ func NewContent(generatedPath string, settings *Settings, log logrus.FieldLogger
 	return &Content{settings, log, htmlRenderer, w}
 }
 
-func (content *Content) RenderHtml(ctx router.Context, name, defaultTitle string, data interface{}) error {
-	bytes, err := content.HtmlRenderer.Render(name, defaultTitle, data)
-	if err != nil {
-		return err
-	}
-	return ctx.Respond(bytes)
-}
-
-func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
-	r.GetRootHTML(func(ctx router.Context) error {
-		return content.RenderHtml(ctx, "root", "", "Hello World!")
-	})
-	r.GetHTML("/404.html", func(ctx router.Context) error {
-		return content.RenderHtml(ctx, "404", "404", nil)
-	})
-}
-
 func (content *Content) WildcardUrls() ([]string, error) {
 	return []string{}, nil
 }
@@ -50,4 +33,25 @@ func (content *Content) AssetsUrl() string {
 
 func (content *Content) GeneratedAssetsPath() string {
 	return content.Webpack.GeneratedAssetsPath()
+}
+
+func (content *Content) RenderHtml(ctx router.Context, name, defaultTitle string, data interface{}) error {
+	bytes, err := content.HtmlRenderer.Render(name, defaultTitle, data)
+	if err != nil {
+		return err
+	}
+	return ctx.Respond(bytes)
+}
+
+func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
+	r.GetRootHTML(content.getRoot)
+	r.GetHTML("/404.html", content.get404)
+}
+
+func (content *Content) getRoot(ctx router.Context) error {
+	return content.RenderHtml(ctx, "root", "", "Hello World!")
+}
+
+func (content *Content) get404(ctx router.Context) error {
+	return content.RenderHtml(ctx, "404", "404", nil)
 }
