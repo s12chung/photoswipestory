@@ -1,16 +1,6 @@
 {{define "content"}}
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide text-slide">
-            <div>Swipe Me</div>
-        </div>
-
-        {{range .SwiperIamgePaths}}
-            <div class="swiper-slide">
-                <img {{responsiveAttrs "swiper" .}}>
-            </div>
-        {{end}}
-    </div>
-</div>
-{{ htmlSafe (sectionize (replaceResponsiveAttrs (markdown "content.md"))) }}
+<section class="text">
+    <h1>{{.Heading}}</h1>
+    <a href="/{{.FirstPageName}}">Start ></a>
+</section>
 {{end}}

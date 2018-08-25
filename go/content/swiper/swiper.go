@@ -18,20 +18,34 @@ func NewImageData(settings *Settings) *ImageData {
 
 const orderFile = "order.txt"
 
-func (imageData *ImageData) Paths() ([]string, error) {
+func (imageData *ImageData) OrderFilenames() ([]string, error) {
 	imagePath := imageData.settings.ImagePath
-
 	bytes, err := ioutil.ReadFile(path.Join(imagePath, orderFile))
 	if err != nil {
 		return nil, err
 	}
 
-	var imagePaths []string
+	var orderFilenames []string
 	for _, filename := range strings.Split(string(bytes), "\n") {
 		filename = strings.TrimSpace(filename)
 		if filename == "" {
 			continue
 		}
+		orderFilenames = append(orderFilenames, filename)
+	}
+	return orderFilenames, nil
+}
+
+func (imageData *ImageData) Paths() ([]string, error) {
+	orderFilenames, err := imageData.OrderFilenames()
+	if err != nil {
+		return nil, err
+	}
+
+	imagePath := imageData.settings.ImagePath
+	var imagePaths []string
+	for _, filename := range orderFilenames {
+		filename = strings.TrimSpace(filename)
 		_, err := os.Stat(path.Join(imagePath, filename))
 		if err != nil {
 			return nil, err

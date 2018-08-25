@@ -1,0 +1,33 @@
+{{define "content"}}
+{{if not .HasNext}}
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide text-slide">
+                <div>Swipe Me ></div>
+            </div>
+            {{range .SwiperPaths}}
+                <div class="swiper-slide">
+                    <img {{responsiveAttrs "swiper" .}}>
+                </div>
+            {{end}}
+        </div>
+    </div>
+{{else}}
+    <img {{responsiveAttrs "content" .Page.ImageSrc}}>
+{{end}}
+
+<section class="text">
+    {{ htmlSafe (markdown .Page.Markdown) }}
+
+    <footer>
+        {{if .HasPrev}}
+            <a href="/{{.Prev.Name}}">< Prev</a>
+        {{else}}
+            <a href="/">< Previous</a>
+        {{end}}
+        {{if .HasNext}}
+            <a href="/{{.Next.Name}}">Next ></a>
+        {{end}}
+    </footer>
+</section>
+{{end}}

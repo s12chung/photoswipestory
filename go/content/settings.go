@@ -9,14 +9,18 @@ import (
 )
 
 type Settings struct {
-	Html     *html.Settings     `json:"html,omitempty"`
-	Webpack  *webpack.Settings  `json:"webpack,omitempty"`
-	Markdown *markdown.Settings `json:"markdown,omitempty"`
-	Swiper   *swiper.Settings   `json:"swiper,omitempty"`
+	Heading     string             `json:"heading,omitempty"`
+	ContentPath string             `json:"content_path,omitempty"`
+	Html        *html.Settings     `json:"html,omitempty"`
+	Webpack     *webpack.Settings  `json:"webpack,omitempty"`
+	Markdown    *markdown.Settings `json:"markdown,omitempty"`
+	Swiper      *swiper.Settings   `json:"swiper,omitempty"`
 }
 
 func DefaultSettings() *Settings {
 	return &Settings{
+		"Some Title",
+		"content/markdowns/",
 		html.DefaultSettings(),
 		webpack.DefaultSettings(),
 		markdown.DefaultSettings(),
