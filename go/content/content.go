@@ -10,15 +10,17 @@ import (
 	"github.com/s12chung/gostatic/go/lib/webpack"
 
 	"photopage/go/content/plugins"
+	"photopage/go/content/swiper"
 )
 
 type Content struct {
 	Settings *Settings
 	Log      logrus.FieldLogger
 
-	HtmlRenderer *html.Renderer
-	Webpack      *webpack.Webpack
-	Markdown     *markdown.Markdown
+	HtmlRenderer    *html.Renderer
+	Webpack         *webpack.Webpack
+	Markdown        *markdown.Markdown
+	SwiperImageData *swiper.ImageData
 }
 
 func NewContent(generatedPath string, settings *Settings, log logrus.FieldLogger) *Content {
@@ -28,7 +30,8 @@ func NewContent(generatedPath string, settings *Settings, log logrus.FieldLogger
 	w := webpack.NewWebpack(generatedPath, settings.Webpack, log)
 	htmlRenderer := html.NewRenderer(settings.Html, []html.Plugin{w, md, sectionizer}, log)
 
-	return &Content{settings, log, htmlRenderer, w, md}
+	swiperImageData := swiper.NewImageData(settings.Swiper)
+	return &Content{settings, log, htmlRenderer, w, md, swiperImageData}
 }
 
 func (content *Content) WildcardUrls() ([]string, error) {
@@ -57,7 +60,17 @@ func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
 }
 
 func (content *Content) getRoot(ctx router.Context) error {
-	return content.RenderHtml(ctx, "root", "", nil)
+	swiperIamgePaths, err := content.SwiperImageData.Paths()
+	if err != nil {
+		return err
+	}
+
+	data := struct {
+		SwiperIamgePaths []string
+	}{
+		swiperIamgePaths,
+	}
+	return content.RenderHtml(ctx, "root", "", data)
 }
 
 func (content *Content) get404(ctx router.Context) error {
