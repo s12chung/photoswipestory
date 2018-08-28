@@ -6,6 +6,8 @@ import (
 	"os"
 	"path"
 	"strings"
+
+	"github.com/s12chung/gostatic/go/lib/utils"
 )
 
 type ImageData struct {
@@ -50,7 +52,7 @@ func (imageData *ImageData) Paths() ([]string, error) {
 		if err != nil {
 			return nil, err
 		}
-		imagePaths = append(imagePaths, filename)
+		imagePaths = append(imagePaths, path.Join(utils.CleanFilePath(imagePath), filename))
 	}
 
 	dirFilePaths, err := ioutil.ReadDir(imagePath)

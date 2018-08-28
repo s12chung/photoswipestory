@@ -20,7 +20,7 @@ type Settings struct {
 func DefaultSettings() *Settings {
 	return &Settings{
 		"Some Title",
-		"content/markdowns/",
+		"content/markdowns",
 		html.DefaultSettings(),
 		webpack.DefaultSettings(),
 		markdown.DefaultSettings(),

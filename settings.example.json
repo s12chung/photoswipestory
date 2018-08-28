@@ -1,13 +1,6 @@
 {
   "content": {
     "heading": "Some Title",
-    "webpack": {
-      "responsive_image_map": {
-        "assets":  "images",
-        "content": "content/images",
-        "swiper": "content/swiper"
-      }
-    },
     "html": {
       "website_title": "Your Website Title"
     }

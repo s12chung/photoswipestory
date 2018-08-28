@@ -2,15 +2,6 @@
 
 
 [[projects]]
-  name = "github.com/golang/mock"
-  packages = [
-    "mockgen",
-    "mockgen/model"
-  ]
-  revision = "c34cdb4725f4c3844d095133c6e40e448b86589b"
-  version = "v1.1.1"
-
-[[projects]]
   name = "github.com/russross/blackfriday"
   packages = ["."]
   revision = "cadec560ec52d93835bf2f15bd794700d3a2473b"
@@ -25,11 +16,12 @@
     "go/lib/html",
     "go/lib/markdown",
     "go/lib/pool",
+    "go/lib/robots",
     "go/lib/router",
     "go/lib/utils",
     "go/lib/webpack"
   ]
-  revision = "16cfc4fc2b001ee55267a1322adfcd13de57f69e"
+  revision = "ecb8b1c270b14bd95a1336dfbe533cb69dcf2b36"
 
 [[projects]]
   branch = "master"
@@ -56,11 +48,11 @@
     "unix",
     "windows"
   ]
-  revision = "4910a1d54f876d7b22162a85f4d066d3ee649450"
+  revision = "d99a578cf41bfccdeaf48b0845c823a4b8b0ad5e"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "06c2643a49715885a51058e8c2d31c19e9e4fd09de2805d2ea57469969d2e4ef"
+  inputs-digest = "136945742596880f3b0501f424dbf85550f2fb7303ee4a9f1561f80bed0a6ec7"
   solver-name = "gps-cdcl"
   solver-version = 1

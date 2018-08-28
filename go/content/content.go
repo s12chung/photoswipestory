@@ -8,11 +8,12 @@ import (
 	"github.com/s12chung/gostatic/go/app"
 	"github.com/s12chung/gostatic/go/lib/html"
 	"github.com/s12chung/gostatic/go/lib/markdown"
+	"github.com/s12chung/gostatic/go/lib/robots"
 	"github.com/s12chung/gostatic/go/lib/router"
+	"github.com/s12chung/gostatic/go/lib/utils"
 	"github.com/s12chung/gostatic/go/lib/webpack"
 	"github.com/sirupsen/logrus"
 
-	"github.com/s12chung/gostatic/go/lib/utils"
 	"photopage/go/content/swiper"
 )
 
@@ -90,7 +91,7 @@ func (content *Content) Pages() ([]*Page, error) {
 		if filePathMap[markdownFilepath] {
 			pages = append(pages, &Page{
 				nameWithoutExt,
-				imageFilename,
+				path.Join(utils.CleanFilePath(content.Settings.ContentPath), "images", imageFilename),
 				markdownFilename,
 			})
 		}
@@ -104,6 +105,7 @@ func (content *Content) Pages() ([]*Page, error) {
 
 func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
 	r.GetHTML("/404.html", content.get404)
+	r.GetHTML("/robots.txt", content.getRobots)
 
 	pages, err := content.Pages()
 	if err != nil {
@@ -162,4 +164,11 @@ func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
 
 func (content *Content) get404(ctx router.Context) error {
 	return content.RenderHtml(ctx, "404", "404", nil)
+}
+
+func (content *Content) getRobots(ctx router.Context) error {
+	userAgents := []*robots.UserAgent{
+		robots.NewUserAgent(robots.EverythingUserAgent, []string{"/"}),
+	}
+	return ctx.Respond([]byte(robots.ToFileString(userAgents)))
 }

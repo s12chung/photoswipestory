@@ -7,13 +7,13 @@
             </div>
             {{range .SwiperPaths}}
                 <div class="swiper-slide">
-                    <img {{responsiveAttrs "swiper" .}}>
+                    <img {{responsiveAttrs .}}>
                 </div>
             {{end}}
         </div>
     </div>
 {{else}}
-    <img {{responsiveAttrs "content" .Page.ImageSrc}}>
+    <img {{responsiveAttrs .Page.ImageSrc}}>
 {{end}}
 
 <section class="text">
