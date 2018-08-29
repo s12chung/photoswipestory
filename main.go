@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"photopage/go/content"
+	"github.com/s12chung/photoswipestory/go/content"
 
 	"github.com/s12chung/gostatic/go/app"
 	"github.com/s12chung/gostatic/go/cli"

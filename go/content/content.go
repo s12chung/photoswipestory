@@ -14,7 +14,7 @@ import (
 	"github.com/s12chung/gostatic/go/lib/webpack"
 	"github.com/sirupsen/logrus"
 
-	"photopage/go/content/swiper"
+	"github.com/s12chung/photoswipestory/go/content/swiper"
 )
 
 type Content struct {

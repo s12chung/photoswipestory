@@ -19,7 +19,7 @@ dev: clean build watch
 prod: clean
 	NODE_ENV=production webpack -p
 	go install
-	$(GOPATH)/bin/photopage
+	$(GOPATH)/bin/photoswipestory
 
 test:
 	go test ./go/...
@@ -80,14 +80,14 @@ clean-all: clean
 
 server: build-assets
 	go install
-	$(GOPATH)/bin/photopage -server
+	$(GOPATH)/bin/photoswipestory -server
 
 file-server:
-	$(GOPATH)/bin/photopage -file-server
+	$(GOPATH)/bin/photoswipestory -file-server
 
 build-go:
 	go install
-	$(GOPATH)/bin/photopage
+	$(GOPATH)/bin/photoswipestory
 
 build-assets:
 	webpack --color

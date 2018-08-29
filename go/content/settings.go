@@ -5,7 +5,7 @@ import (
 	"github.com/s12chung/gostatic/go/lib/markdown"
 	"github.com/s12chung/gostatic/go/lib/webpack"
 
-	"photopage/go/content/swiper"
+	"github.com/s12chung/photoswipestory/go/content/swiper"
 )
 
 type Settings struct {
