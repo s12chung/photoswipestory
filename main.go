@@ -17,6 +17,13 @@ func main() {
 	contentSettings := content.DefaultSettings()
 	settings.Content = contentSettings
 	utils.SettingsFromFile("./settings.json", settings, log)
+	if contentSettings.Demo {
+		contentSettings.Heading = "My Homes."
+		contentSettings.Html.WebsiteTitle = "My Homes"
+		contentSettings.Markdown.MarkdownsPath = "content/demo"
+		contentSettings.ContentPath = "content/demo"
+		contentSettings.Swiper.ImagePath = "content/demo/swiper"
+	}
 
 	theContent := content.NewContent(settings.GeneratedPath, contentSettings, log)
 	err := cli.Run(app.NewApp(theContent, settings, log))

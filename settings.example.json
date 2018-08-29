@@ -1,5 +1,6 @@
 {
   "content": {
+    "demo": true,
     "heading": "Some Title",
     "html": {
       "website_title": "Your Website Title"

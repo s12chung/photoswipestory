@@ -12,6 +12,10 @@
             {{end}}
         </div>
     </div>
+
+    {{if .Demo}}
+        <style type="text/css">.swiper-container img { max-width: 150vh; }</style>
+    {{end}}
 {{else}}
     <img {{responsiveAttrs .Page.ImageSrc}}>
 {{end}}

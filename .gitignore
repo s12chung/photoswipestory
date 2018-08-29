@@ -11,4 +11,4 @@ node_modules/*
 settings.json
 aws/credentials
 
-content/*
+content/markdowns/*

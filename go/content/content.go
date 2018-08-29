@@ -132,6 +132,7 @@ func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
 		}
 		r.GetHTML("/"+currentPage.Name, func(ctx router.Context) error {
 			data := struct {
+				Demo        bool
 				Page        *Page
 				Prev        *Page
 				HasPrev     bool
@@ -139,6 +140,7 @@ func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
 				HasNext     bool
 				SwiperPaths []string
 			}{
+				content.Settings.Demo,
 				currentPage,
 				prev,
 				prev != nil,

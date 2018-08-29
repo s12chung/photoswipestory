@@ -21,6 +21,8 @@ module.exports = {
         rules: defaults.allRules()
             .concat(imageDefaults.responsiveRules(relativePath('content/markdowns/images'), 'content/markdowns/images/'))
             .concat(imageDefaults.responsiveRules(relativePath('content/markdowns/swiper'), 'content/markdowns/swiper/'))
+            .concat(imageDefaults.responsiveRules(relativePath('content/demo/images'), 'content/demo/images/'))
+            .concat(imageDefaults.responsiveRules(relativePath('content/demo/swiper'), 'content/demo/swiper/'))
             .concat([
                 {
                     test: /\.js$/,
