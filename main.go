@@ -7,7 +7,6 @@ import (
 
 	"github.com/s12chung/gostatic/go/app"
 	"github.com/s12chung/gostatic/go/cli"
-	"github.com/s12chung/gostatic/go/lib/utils"
 )
 
 func main() {
@@ -16,7 +15,7 @@ func main() {
 	settings := app.DefaultSettings()
 	contentSettings := content.DefaultSettings()
 	settings.Content = contentSettings
-	utils.SettingsFromFile("./settings.json", settings, log)
+	app.SettingsFromFile("./settings.json", settings, log)
 	if contentSettings.Demo {
 		contentSettings.Heading = "My Homes."
 		contentSettings.Html.WebsiteTitle = "My Homes"

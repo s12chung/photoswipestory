@@ -48,8 +48,8 @@ func (content *Content) GeneratedAssetsPath() string {
 	return content.Webpack.GeneratedAssetsPath()
 }
 
-func (content *Content) RenderHtml(ctx router.Context, name, defaultTitle string, data interface{}) error {
-	bytes, err := content.HtmlRenderer.Render(name, defaultTitle, data)
+func (content *Content) RenderHtml(ctx router.Context, name string, data interface{}) error {
+	bytes, err := content.HtmlRenderer.Render(name, data)
 	if err != nil {
 		return err
 	}
@@ -150,7 +150,7 @@ func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
 			}
 
 			title := strings.Title(strings.Replace(currentPage.Name, "_", " ", -1))
-			return content.RenderHtml(ctx, "page", title, data)
+			return content.RenderHtml(ctx, "page", layoutData{title, data})
 		})
 	}
 
@@ -160,12 +160,12 @@ func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
 			FirstPageName string
 		}{content.Settings.Heading, pages[0].Name}
 
-		return content.RenderHtml(ctx, "root", "", data)
+		return content.RenderHtml(ctx, "root", layoutData{"", data})
 	})
 }
 
 func (content *Content) get404(ctx router.Context) error {
-	return content.RenderHtml(ctx, "404", "404", nil)
+	return content.RenderHtml(ctx, "404", layoutData{"404", nil})
 }
 
 func (content *Content) getRobots(ctx router.Context) error {

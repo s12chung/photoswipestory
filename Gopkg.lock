@@ -21,7 +21,7 @@
     "go/lib/utils",
     "go/lib/webpack"
   ]
-  revision = "ecb8b1c270b14bd95a1336dfbe533cb69dcf2b36"
+  revision = "5099f1dcc68f8131313383548daaf0436305a02b"
 
 [[projects]]
   branch = "master"
