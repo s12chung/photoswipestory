@@ -2,8 +2,9 @@ package content
 
 import (
 	"github.com/s12chung/gostatic/go/lib/html"
-	"github.com/s12chung/gostatic/go/lib/markdown"
 	"github.com/s12chung/gostatic/go/lib/webpack"
+
+	"github.com/s12chung/gostatic-packages/markdown"
 
 	"github.com/s12chung/photoswipestory/go/content/swiper"
 )

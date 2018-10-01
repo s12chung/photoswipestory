@@ -1,3 +1,7 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  name = "github.com/s12chung/gostatic"
+  branch = "master"

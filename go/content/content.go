@@ -5,14 +5,16 @@ import (
 	"path"
 	"strings"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/s12chung/gostatic/go/app"
 	"github.com/s12chung/gostatic/go/lib/html"
-	"github.com/s12chung/gostatic/go/lib/markdown"
-	"github.com/s12chung/gostatic/go/lib/robots"
 	"github.com/s12chung/gostatic/go/lib/router"
 	"github.com/s12chung/gostatic/go/lib/utils"
 	"github.com/s12chung/gostatic/go/lib/webpack"
-	"github.com/sirupsen/logrus"
+
+	"github.com/s12chung/gostatic-packages/markdown"
+	"github.com/s12chung/gostatic-packages/robots"
 
 	"github.com/s12chung/photoswipestory/go/content/swiper"
 )
@@ -36,12 +38,8 @@ func NewContent(generatedPath string, settings *Settings, log logrus.FieldLogger
 	return &Content{settings, log, htmlRenderer, w, md, swiperImageData}
 }
 
-func (content *Content) WildcardUrls() ([]string, error) {
-	return []string{}, nil
-}
-
-func (content *Content) AssetsUrl() string {
-	return content.Webpack.AssetsUrl()
+func (content *Content) AssetsURL() string {
+	return content.Webpack.AssetsURL()
 }
 
 func (content *Content) GeneratedAssetsPath() string {
@@ -53,7 +51,8 @@ func (content *Content) RenderHtml(ctx router.Context, name string, data interfa
 	if err != nil {
 		return err
 	}
-	return ctx.Respond(bytes)
+	ctx.Respond(bytes)
+	return nil
 }
 
 type Page struct {
@@ -103,14 +102,13 @@ func (content *Content) Pages() ([]*Page, error) {
 	return pages, nil
 }
 
-func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
+func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) error {
 	r.GetHTML("/404.html", content.get404)
 	r.GetHTML("/robots.txt", content.getRobots)
 
 	pages, err := content.Pages()
 	if err != nil {
-		content.Log.Error(err)
-		return
+		return err
 	}
 	for i, page := range pages {
 		currentPage := page
@@ -126,8 +124,7 @@ func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
 		} else {
 			swiperPaths, err = content.SwiperImageData.Paths()
 			if err != nil {
-				content.Log.Error(err)
-				return
+				return err
 			}
 		}
 		r.GetHTML("/"+currentPage.Name, func(ctx router.Context) error {
@@ -162,6 +159,7 @@ func (content *Content) SetRoutes(r router.Router, tracker *app.Tracker) {
 
 		return content.RenderHtml(ctx, "root", layoutData{"", data})
 	})
+	return nil
 }
 
 func (content *Content) get404(ctx router.Context) error {
@@ -172,5 +170,6 @@ func (content *Content) getRobots(ctx router.Context) error {
 	userAgents := []*robots.UserAgent{
 		robots.NewUserAgent(robots.EverythingUserAgent, []string{"/"}),
 	}
-	return ctx.Respond([]byte(robots.ToFileString(userAgents)))
+	ctx.Respond([]byte(robots.ToFileString(userAgents)))
+	return nil
 }

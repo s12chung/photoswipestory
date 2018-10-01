@@ -25,7 +25,7 @@ func main() {
 	}
 
 	theContent := content.NewContent(settings.GeneratedPath, contentSettings, log)
-	err := cli.Run(app.NewApp(theContent, settings, log))
+	err := cli.RunDefault(app.NewApp(theContent, settings, log))
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(1)
